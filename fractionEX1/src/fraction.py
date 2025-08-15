@@ -12,15 +12,15 @@ class Fraction:
         else:
             self.denominador = denominador    
         
-    # Metodo str sobrescritro
+    # Metodo str sobrescritro, para mostrar a fracao "formatada"
     def __str__(self):
-        return  f"{self.numerador}/{self.denominador}" if (self.numerador % self.denominador != 0) else f"{self.numerador // self.denominador}"
+        return  f"({self.numerador}/{self.denominador})" if (self.numerador % self.denominador != 0) else f"{self.numerador // self.denominador}"
     
-    # Get do numerador
+    # Retorna o Valor do denominador
     def getNumerador(self):
         return self.numerador
     
-    # Get do denominador 
+    # Retorna o valor do denominador
     def getDenominador(self):
         return self.denominador
     
@@ -35,6 +35,7 @@ class Fraction:
     def setNumerador(self, newNumerador: int):
         self.numerador = newNumerador
     
+    # Tira o Maior Divisor Comum de duas fracoes  
     @staticmethod    
     def MDC(numerador, denominador):
         if numerador %  denominador == 0:
@@ -42,14 +43,14 @@ class Fraction:
         else:
             return Fraction.MDC(denominador, (numerador % denominador))   
     
-    # Simplifica a fracao
+    # Simplifica a fracao 
     def simpleFraction(self):
         valueMDC = Fraction.MDC(self.numerador, self.denominador) # Pega o maximo divisor comum da fracao
         
         self.numerador //= valueMDC # simplifica o denominador
         self.denominador //= valueMDC # simplifica o nominador
         
-    # Recebe a fracao para somar a essa
+    # Operador de soma (+)
     def __add__(self, fraction):
         new_numerador = (self.numerador * fraction.denominador) + (fraction.numerador * self.denominador) # Novo numerador 
         new_denominador = self.denominador * fraction.denominador # Novo denominador 
@@ -59,7 +60,7 @@ class Fraction:
         
         return fraction # retorna a nova fracao
     
-    # Recebe fracao para subtrair a essa
+    # Operador de subtracao (-)
     def __sub__(self, fraction):
         new_numerador = (self.numerador * fraction.denominador) - (fraction.numerador * self.denominador) # Novo numerador 
         new_denominador = self.denominador * fraction.denominador # Novo denominador 
@@ -69,7 +70,7 @@ class Fraction:
         
         return fraction  # retorna a nova fracao
     
-    # Recebe a fracao para multiplicar a essa
+    # Operador de multiplicacao (*)
     def __mul__(self, fraction):
         new_numerador = (self.numerador * fraction.numerador) # Novo numerador 
         new_denominador = (self.denominador * fraction.denominador) # Novo denominador 
@@ -79,7 +80,7 @@ class Fraction:
         
         return fraction  # retorna a nova fracao
     
-    # Recebe a fracao para dividir a essa
+    # Operador de divisao (/)
     def __truediv__(self, fraction):
         new_numerador = (self.numerador * fraction.denominador) # Novo numerador 
         new_denominador = (self.denominador * fraction.numerador) # Novo denominador 
@@ -89,34 +90,34 @@ class Fraction:
         
         return fraction  # retorna a nova fracao
     
-    # Verifica a igualdade das fracoes 
-    def __eq__(self, fraction):
+    # Operador de igualdade (==)
+    def __eq__(self, fraction) -> bool:
         return (self.numerador == fraction.numerador) and (self.denominador == fraction.denominador) 
     
-    # Verifica a diferenca das fracoes 
+    # Operador de diferenca (!=) 
     def __ne__(self, fraction) -> bool:
         return (self.numerador != fraction.numerador) or (self.denominador != fraction.denominador)
     
-    # Verifica se a primeira fracao e maior que a segunda (>)
+    # Operador ralacional maior (>)
     def __gt__(self, fraction2) -> bool:
         fraction1 = Fraction(self.numerador, self.denominador) # Cria a primeira fracao
         resultFraction = fraction1 - fraction2 # Tira a diferenca dessas duas fracoes 
         
         return (resultFraction.numerador) > 0 or (resultFraction.numerador < 0 and resultFraction.denominador < 0)
     
-    # Verifica se a primeira fracao e menor que a segunda (>=)
+    # Operador relacional maior igual (>=)
     def __ge__(self, fraction2) -> bool:
         fraction1 = Fraction(self.numerador, self.denominador) # Cria a primeira fracao
     
         return (fraction1 > fraction2) or (fraction1 == fraction2)
     
-    # Verifica se a primeira fracao e maior igual que a segunda (<)
+    # Operador relacional menor (<)
     def __lt__(self, fraction2) -> bool:
         fraction1 = Fraction(self.numerador, self.denominador)
         
         return not (fraction1 >= fraction2)
     
-    # Verifica se a primeira fracao e menor igual que a segunda (<=)
+    # Operador relacional menor igual (<=)
     def __le__(self, fraction2) -> bool:
         fraction1 = Fraction(self.numerador, self.denominador)
         
