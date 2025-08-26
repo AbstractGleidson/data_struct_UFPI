@@ -1,8 +1,14 @@
 import nltk.corpus as corpus
 import nltk
 
-nltk.download("stopwords") # Faz o download das stopwords usando a api do nltk
+try:
+    nltk.find("corpora/stopwords") # Verifica se ja tem os arquivo com as stopwords
+except LookupError:    
+    nltk.download("stopwords") # Faz o download das stopwords usando a api do nltk, caso contrario.
 
+
+# A aplicacao apresenta alguns erros, por conta de caracteres especiais, pretendo corrigir depois implementando 
+# Expressoes regulares 
 class Text:
     stopwords = corpus.stopwords.words("portuguese") # Cria uma list com as stopwords, stop_words e uma variavel static
     
@@ -67,12 +73,6 @@ class Text:
             for i in range(len(list_word)):
                 if caracter in list_word[i]:
                     list_word[i] = list_word[i].replace(caracter, "") # Troca os caracteres de pontuacao por espacos e substitui a string
-                    
-        for caracter in ponctuation:
-            for i in range(len(list_word)):
-                if caracter in list_word:
-                    list_word.pop(i) # Troca os caracteres de pontuacao por espacos e substitui a string
-                
         
         return list_word
     

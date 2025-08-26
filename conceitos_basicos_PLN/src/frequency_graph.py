@@ -6,9 +6,9 @@ def frequency_graph(frequency: list, n: int):
     category = []
     values = []
     
-    # Limita a quantidade de categorias 
-    if n > 10:
-        n = 10
+    # Limita a quantidade de categorias para a quantidade de palavras para nao dar erro
+    if n > len(frequency):
+        n = len(frequency)
     
     for i in range(n):
         category.append(frequency[i][0])
